@@ -5,14 +5,14 @@ import (
 	"time"
 )
 
-type hash_tuple struct {
-	key   int
-	value int
+type Tuple struct {
+	Key   int
+	Value int
 }
 
 type hash struct {
 	hash_function func(int) int
-	store         [][]hash_tuple
+	store         [][]Tuple
 }
 
 func NewHash() hash {
@@ -23,7 +23,7 @@ func NewHash() hash {
 	h.hash_function = func(n int) int {
 		return (((a*n + b) % 113) % 50)
 	}
-	h.store = make([][]hash_tuple, 50)
+	h.store = make([][]Tuple, 50)
 
 	return h
 }
@@ -31,12 +31,12 @@ func NewHash() hash {
 func (h *hash) Hash_set(key, value int) {
 	index := h.hash_function(key)
 	if h.store[index] == nil {
-		h.store[index] = make([]hash_tuple, 5)
-		h.store[index][0] = hash_tuple{key, value}
+		h.store[index] = make([]Tuple, 5)
+		h.store[index][0] = Tuple{key, value}
 	} else {
 		for i := 0; i < 5; i++ {
-			if h.store[index][i].value == 0 {
-				h.store[index][i] = hash_tuple{key, value}
+			if h.store[index][i].Value == 0 {
+				h.store[index][i] = Tuple{key, value}
 				break
 			}
 		}
@@ -46,8 +46,8 @@ func (h *hash) Hash_set(key, value int) {
 func (h *hash) Hash_get(key int) int {
 	index := h.hash_function(key)
 	for _, t := range h.store[index] {
-		if t.key == key {
-			return t.value
+		if t.Key == key {
+			return t.Value
 		}
 	}
 
