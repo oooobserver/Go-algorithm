@@ -24,6 +24,7 @@ type BinaryTree struct {
 	height int
 }
 
+// Create a test binary tree
 func newTestBinaryTree() BinaryTree {
 	bt := BinaryTree{}
 	nodes := make([]BinaryNode, 0)
@@ -32,17 +33,35 @@ func newTestBinaryTree() BinaryTree {
 	}
 	nodes[1].left = &nodes[2]
 	nodes[1].right = &nodes[3]
-
 	nodes[2].left = &nodes[4]
 	nodes[2].right = &nodes[5]
-
 	nodes[3].left = &nodes[6]
 	nodes[3].right = &nodes[7]
 	bt.root = &nodes[1]
+	return bt
+}
+
+func newTestBST() BinaryTree {
+	bt := BinaryTree{}
+
+	nodes := make([]BinaryNode, 0)
+	for i := 1; i <= 8; i++ {
+		nodes = append(nodes, BinaryNode{i, nil, nil})
+	}
+
+	nodes[4].left = &nodes[2]
+	nodes[4].right = &nodes[6]
+	nodes[2].left = &nodes[1]
+	nodes[2].right = &nodes[3]
+	nodes[6].left = &nodes[5]
+	nodes[6].right = &nodes[7]
+	nodes[1].left = &nodes[0]
+	bt.root = &nodes[4]
 
 	return bt
 }
 
+// Print the structure of a binary tree
 func (bt *BinaryTree) PrintBinaryTree() {
 	tmp := bt.root
 	printBinaryTreeHelper(tmp, 0)
@@ -128,44 +147,70 @@ func (bt *BinaryTree) PostOrderDisplay(node ...*BinaryNode) {
 	fmt.Println(cur.item)
 }
 
-func InOrderBinarySubTreeFirst(node *BinaryNode) *BinaryNode {
+// Return the first node of a sub-tree using in-order
+func BinarySubTreeFirst(node *BinaryNode) *BinaryNode {
 	if node.left != nil {
-		return InOrderBinarySubTreeFirst(node.left)
+		return BinarySubTreeFirst(node.left)
 	} else {
 		return node
 	}
 }
 
-func InOrderBinarySubTreeLast(node *BinaryNode) *BinaryNode {
+// Return the last node of a sub-tree using in-order
+func BinarySubTreeLast(node *BinaryNode) *BinaryNode {
 	if node.right != nil {
-		return InOrderBinarySubTreeLast(node.right)
+		return BinarySubTreeLast(node.right)
 	} else {
 		return node
 	}
 }
 
-func (bt *BinaryTree) InOrderInsertAfter(node, new *BinaryNode) {
+// Insert the node after specify node, keep in-order
+func (bt *BinaryTree) InsertAfter(node *BinaryNode, new_value int) {
+	new_node := &BinaryNode{item: new_value}
 	if node.right == nil {
-		node.right = new
+		node.right = new_node
 	} else {
-		tmp := InOrderBinarySubTreeFirst(node.right)
-		tmp.left = new
+		tmp := BinarySubTreeFirst(node.right)
+		tmp.left = new_node
 	}
 }
 
-// Delete a item in the binary tree, but still maintain in-order
-// func (bt *BinaryTree) Delete(node *BinaryNode) {
-// 	if node.left == nil && node.right == nil {
+// Delete a node and keep the inorder, this is for tree with BST
+func (bt *BinaryTree) BinaryDelete(value int) {
+	// In case, the root change
+	bt.root = binaryDeleteHelper(bt.root, value)
+}
 
-// 	}
-// }
+func binaryDeleteHelper(node *BinaryNode, value int) *BinaryNode {
+	if node == nil {
+		return nil
+	}
 
-// func InOrderNodeSuccessor(node *BinaryNode) *BinaryNode {
-// 	if node.right != nil {
-// 		return node.right
-// 	} else {
-// 		for node != nil {
+	if value < node.item {
+		node.left = binaryDeleteHelper(node.left, value)
+	} else if value > node.item {
+		node.right = binaryDeleteHelper(node.right, value)
+	} else {
+		// Case 1: No child or only one child
+		// a: if no child, just return and assign nil to its parent's left or right
+		// b: if has right node, return and its right node to replace itself
+		// c: left situation is same as right
+		if node.left == nil {
+			return node.right
+		} else if node.right == nil {
+			return node.left
+		}
 
-// 		}
-// 	}
-// }
+		// Case 2: Node with two children
+		// Find the minimum value in the right subtree
+		// Exchange the two node
+		// Alternativly, can exchange the last node of its left tree: pred := BinarySubTreeLast(node.left)
+		successor := BinarySubTreeFirst(node.right)
+		node.item = successor.item
+		// Keep delete in its right sub-tree
+		node.right = binaryDeleteHelper(node.right, successor.item)
+	}
+
+	return node
+}
