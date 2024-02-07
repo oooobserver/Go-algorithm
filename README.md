@@ -11,4 +11,4 @@ Already implemented algorithms:
 Already implemented data structures:
 * Hash table
 * Linked list
-* Binary tree
+* Binary tree (BST)
