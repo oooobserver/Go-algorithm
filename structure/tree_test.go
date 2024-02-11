@@ -24,3 +24,11 @@ func TestBSTInsert(t *testing.T) {
 	test_res := bt.InorderTrav()
 	require.Equal(t, res, test_res)
 }
+
+func TestBinarySearch(t *testing.T) {
+	bt := newTestBST()
+	require.True(t, bt.BinarySearch(1))
+	require.True(t, bt.BinarySearch(4))
+	require.True(t, bt.BinarySearch(7))
+	require.False(t, bt.BinarySearch(9))
+}

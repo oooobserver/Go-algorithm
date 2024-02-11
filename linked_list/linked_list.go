@@ -1,4 +1,4 @@
-package structure
+package linkedlist
 
 import (
 	"fmt"
@@ -11,6 +11,10 @@ type Node struct {
 
 type LinkedList struct {
 	Head *Node
+}
+
+func New() LinkedList {
+	return LinkedList{}
 }
 
 // Keep the order while appending, O(n)
@@ -66,13 +70,15 @@ func (l *LinkedList) Delete(v int) {
 	fmt.Println("LinkedList delete error: element not exit")
 }
 
-func (l *LinkedList) Display() {
-	helper := l.Head
-	for helper != nil {
-		fmt.Printf("%d ", helper.Value)
-		helper = helper.Next
+// Implement the fmt.print feature
+func (l LinkedList) String() string {
+	var res string
+	cur := l.Head
+	for cur != nil {
+		res += fmt.Sprintf("%d \t", cur.Value)
+		cur = cur.Next
 	}
-	fmt.Printf("\n")
+	return res
 }
 
 func (l *LinkedList) LL2Array() []int {
@@ -84,4 +90,16 @@ func (l *LinkedList) LL2Array() []int {
 	}
 
 	return res
+}
+
+func Array2LL(nums []int) LinkedList {
+	head := &Node{nums[0], nil}
+	cur := head
+	for i := 1; i < len(nums); i++ {
+		tmp := &Node{nums[i], nil}
+		cur.Next = tmp
+		cur = tmp
+	}
+
+	return LinkedList{Head: head}
 }

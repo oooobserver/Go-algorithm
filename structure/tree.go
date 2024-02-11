@@ -20,8 +20,11 @@ type BinaryNode struct {
 }
 
 type BinaryTree struct {
-	root   *BinaryNode
-	height int
+	root *BinaryNode
+}
+
+func SubTreeHeight() {
+
 }
 
 // Create a test binary tree
@@ -163,6 +166,23 @@ func BinarySubTreeLast(node *BinaryNode) *BinaryNode {
 	} else {
 		return node
 	}
+}
+
+func (bt *BinaryTree) BinarySearch(value int) bool {
+	return binarySearchHelper(bt.root, value)
+}
+
+func binarySearchHelper(node *BinaryNode, value int) bool {
+	if node == nil {
+		return false
+	}
+	if value < node.item {
+		return binarySearchHelper(node.left, value)
+	} else if value > node.item {
+		return binarySearchHelper(node.right, value)
+	}
+
+	return true
 }
 
 // Insert the node after specify node, keep in-order

@@ -1,4 +1,4 @@
-Use `golang` to implement algorithms and data structures. And every implementation has unit test. This repo is for learning purpose.
+Use `golang` to implement algorithms and data structures. And every implementation has a unit test. This repo is for learning purposes. Each algorithm has the time complexity analysis.
 
 Already implemented algorithms:
 * Sort:
@@ -11,4 +11,6 @@ Already implemented algorithms:
 Already implemented data structures:
 * Hash table
 * Linked list
-* Binary tree (BST)
+* Binary tree
+* BST
+* AVL tree 

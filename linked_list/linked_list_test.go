@@ -1,4 +1,4 @@
-package structure
+package linkedlist
 
 import (
 	"math/rand"
@@ -6,15 +6,16 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/require"
+	"shenye.com/util"
 )
 
 var rng = rand.New(rand.NewSource(time.Now().UnixNano()))
 
 func TestLinkedListAppend(t *testing.T) {
-	l := LinkedList{}
-	order_l := LinkedList{}
+	l := New()
+	order_l := New()
 
-	length := rng.Intn(100)
+	length := util.RandomInt(0, 100)
 	record := make([]int, 0)
 
 	for i := 0; i < length; i++ {
