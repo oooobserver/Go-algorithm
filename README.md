@@ -6,6 +6,7 @@ Already implemented algorithms:
   * Merge sort
   * Counting sort
   * Radix sort 
+  * Binary Sort
 
 
 Already implemented data structures:
@@ -14,3 +15,4 @@ Already implemented data structures:
 * Binary tree
 * BST
 * AVL tree 
+* Binary Heap

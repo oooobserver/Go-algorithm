@@ -91,3 +91,24 @@ func TestRadixSort(t *testing.T) {
 		require.Equal(t, tmp, arr)
 	}
 }
+
+func TestBinarySort(t *testing.T) {
+	testArray := make([][]int, 10)
+	for i := range testArray {
+		// Avoid empty list
+		size := rng.Intn(100) + 1
+		testArray[i] = make([]int, size)
+
+		for j := 0; j < size; j++ {
+			testArray[i][j] = rng.Int()
+		}
+	}
+
+	for _, arr := range testArray {
+		tmp := make([]int, len(arr))
+		copy(tmp, arr)
+		BinarySort(tmp)
+		slices.Sort(arr)
+		require.Equal(t, tmp, arr)
+	}
+}

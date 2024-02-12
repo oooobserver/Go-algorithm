@@ -2,6 +2,8 @@ package sort
 
 import (
 	"slices"
+
+	binaryheap "shenye.com/binary_heap"
 )
 
 // Insertion sort, O(n^2)
@@ -121,5 +123,14 @@ func radix_countingSort(arr []int, exp int) {
 
 	for i := 0; i < n; i++ {
 		arr[i] = output[i]
+	}
+}
+
+// O(nlogn)
+func BinarySort(nums []int) {
+	bh := binaryheap.New()
+	bh.Build(nums)
+	for i := len(nums) - 1; i >= 0; i-- {
+		nums[i] = bh.DeleteMax()
 	}
 }

@@ -4,13 +4,13 @@ import (
 	"fmt"
 )
 
-type Node struct {
-	Value int
-	Next  *Node
+type ListNode struct {
+	Value interface{}
+	Next  *ListNode
 }
 
 type LinkedList struct {
-	Head *Node
+	Head *ListNode
 }
 
 func New() LinkedList {
@@ -18,8 +18,8 @@ func New() LinkedList {
 }
 
 // Keep the order while appending, O(n)
-func (l *LinkedList) OrderAppend(v int) {
-	newNode := &Node{v, nil}
+func (l *LinkedList) OrderAppend(v interface{}) {
+	newNode := &ListNode{v, nil}
 
 	if l.Head == nil {
 		l.Head = newNode
@@ -35,8 +35,8 @@ func (l *LinkedList) OrderAppend(v int) {
 }
 
 // More efficient, but break the order, O(1)
-func (l *LinkedList) Append(v int) {
-	newNode := &Node{v, nil}
+func (l *LinkedList) Append(v interface{}) {
+	newNode := &ListNode{v, nil}
 	if l.Head == nil {
 		l.Head = newNode
 		return
@@ -81,8 +81,8 @@ func (l LinkedList) String() string {
 	return res
 }
 
-func (l *LinkedList) LL2Array() []int {
-	res := make([]int, 0)
+func (l *LinkedList) LL2Array() []interface{} {
+	res := make([]interface{}, 0)
 	helper := l.Head
 	for helper != nil {
 		res = append(res, helper.Value)
@@ -92,11 +92,11 @@ func (l *LinkedList) LL2Array() []int {
 	return res
 }
 
-func Array2LL(nums []int) LinkedList {
-	head := &Node{nums[0], nil}
+func Array2LL(nums []interface{}) LinkedList {
+	head := &ListNode{nums[0], nil}
 	cur := head
 	for i := 1; i < len(nums); i++ {
-		tmp := &Node{nums[i], nil}
+		tmp := &ListNode{nums[i], nil}
 		cur.Next = tmp
 		cur = tmp
 	}
