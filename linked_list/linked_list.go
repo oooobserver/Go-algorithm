@@ -81,6 +81,23 @@ func (l LinkedList) String() string {
 	return res
 }
 
+// Reverse target nodes
+func (l *LinkedList) Reverse(target int) {
+	node := l.Head
+	var prev, next, start *ListNode
+	start = node
+	for i := 0; i < target; i++ {
+		next = node.Next
+		node.Next = prev
+		prev = node
+		node = next
+	}
+
+	start.Next = next
+
+	l.Head = prev
+}
+
 func (l *LinkedList) LL2Array() []interface{} {
 	res := make([]interface{}, 0)
 	helper := l.Head

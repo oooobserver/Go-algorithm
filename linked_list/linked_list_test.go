@@ -1,6 +1,7 @@
 package linkedlist
 
 import (
+	"fmt"
 	"math/rand"
 	"testing"
 	"time"
@@ -32,4 +33,17 @@ func TestLinkedListAppend(t *testing.T) {
 	}
 	array = l.LL2Array()
 	require.Equal(t, record, array)
+}
+
+func TestReverse(t *testing.T) {
+	l := New()
+	l.Append(114)
+	l.Append(514)
+	l.Append(12)
+	l.Append(312313)
+	fmt.Println(l)
+
+	l.Reverse(4)
+
+	fmt.Println(l)
 }
