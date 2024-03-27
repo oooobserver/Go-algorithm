@@ -29,6 +29,7 @@ func InsertionSort(nums []int) {
 func MergeSort(nums []int, p ...int) {
 	var a, b, c int
 
+	// Default parameter
 	if len(p) == 0 {
 		a = 0
 		b = len(nums)

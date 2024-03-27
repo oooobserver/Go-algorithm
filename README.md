@@ -13,6 +13,7 @@ Already implemented data structures:
 * Hash table
 * Linked list
 * Binary tree
-* BST
+* BST(Binary Search Tree)
 * AVL tree 
 * Binary Heap
+* Gorounting pool

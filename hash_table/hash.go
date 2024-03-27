@@ -1,31 +1,45 @@
 package hashtable
 
+import "shenye.com/util"
+
 // For now, only support these types of the key: int, string, rune
-// type tuple struct {
-// 	key   interface{}
-// 	value interface{}
-// }
+type tuple struct {
+	key   interface{}
+	value interface{}
+}
 
-// type hash struct {
-// 	hash_function func(int) int
-// 	store         [][]tuple
-// }
+type hash struct {
+	hash_function func(interface{}) int
+	store         [][]tuple
+}
 
-// const hash_length = 100
+const hash_length = 100
 
-// func New() hash {
-// 	var h hash
+func New() hash {
+	var h hash
 
-// 	a := int(util.RandomInt(0, 114))
-// 	b := int(util.RandomInt(0, 114))
+	a := int(util.RandomInt(0, 114))
+	b := int(util.RandomInt(0, 114))
 
-// 	h.hash_function = func(n int) int {
-// 		return (((a*n + b) % 113) % hash_length)
-// 	}
-// 	h.store = make([][]tuple, hash_length  )
+	h.hash_function = func(n interface{}) int {
+		value := 0
+		switch v := n.(type) {
+		case int:
+			value = v
+		case rune:
+			value = int(v)
+		case string:
+			tmp := 0
+			for _, s := range v {
+				tmp = tmp*10 + int(s)
+			}
+		}
+		return (((a*value + b) % 113) % hash_length)
+	}
+	h.store = make([][]tuple, hash_length)
 
-// 	return h
-// }
+	return h
+}
 
 // func (h *hash) Set(key, value int) {
 // 	index := h.hash_function(key)

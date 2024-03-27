@@ -2,6 +2,7 @@ package stack
 
 import (
 	"fmt"
+	"sync"
 )
 
 type Stack struct {
@@ -53,4 +54,29 @@ func (s *Stack) Top() interface{} {
 
 func (s Stack) Len() int {
 	return len(s.items)
+}
+
+type single struct {
+}
+
+func newSingle() *single {
+	return &single{}
+}
+
+func (s *single) Work() string {
+	return "this is the singleton"
+}
+
+var s *single
+var once sync.Once
+
+type Instance interface {
+	Work() string
+}
+
+func GetSingle() Instance {
+	once.Do(func() {
+		s = newSingle()
+	})
+	return s
 }

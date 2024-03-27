@@ -75,13 +75,15 @@ func (l LinkedList) String() string {
 	var res string
 	cur := l.Head
 	for cur != nil {
-		res += fmt.Sprintf("%d \t", cur.Value)
+		res += fmt.Sprintf("%v \t", cur.Value)
 		cur = cur.Next
 	}
 	return res
 }
 
 // Reverse target nodes
+// pre-node-next
+// 1-2-3
 func (l *LinkedList) Reverse(target int) {
 	node := l.Head
 	var prev, next, start *ListNode

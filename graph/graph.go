@@ -38,6 +38,13 @@ func (g *Graph) AddEdge(src int, dst int, weight int) {
 	}
 }
 
+/* Test graph:
+	1--2--5--6
+   	| \
+	|   3--7
+	4--8
+*/
+
 func getTestGraph() Graph {
 	graph := New()
 	graph.AddEdge(1, 2, 3)
@@ -95,4 +102,11 @@ func (g *Graph) DFS(start int) {
 		}
 	}
 	fmt.Println()
+}
+
+func (g *Graph) Topological(start int) {
+	fmt.Printf("%d  ", start)
+	for neighbor := range g.edges[start] {
+		g.Topological(neighbor)
+	}
 }

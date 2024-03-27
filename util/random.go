@@ -10,6 +10,7 @@ var rng = rand.New(rand.NewSource(time.Now().UnixNano()))
 
 const letters = "abcdefghijklmnopqrstuvwxyz"
 
+// Inclusive
 func RandomInt(min, max int) int {
 	return min + rng.Intn(max-min+1)
 }

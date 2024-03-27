@@ -1,6 +1,7 @@
 package structure
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -14,6 +15,12 @@ func TestBSTDelete(t *testing.T) {
 	res := []int{3, 5, 6, 7, 8}
 	test_res := bt.InorderTrav()
 	require.Equal(t, res, test_res)
+}
+
+func TestTreeTrav(t *testing.T) {
+	bt := newTestBST()
+	r := bt.inorderTravFor()
+	fmt.Println(r)
 }
 
 func TestBSTInsert(t *testing.T) {

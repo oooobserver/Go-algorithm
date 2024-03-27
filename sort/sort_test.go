@@ -31,6 +31,40 @@ func TestInsertionSort(t *testing.T) {
 	}
 }
 
+// func MergeSort1(nums []int, p ...int) {
+// 	// Start, End, Middle
+// 	var a, b, c int
+
+// 	// Default parameter
+// 	if len(p) == 0 {
+// 		a = 0
+// 		b = len(nums)
+// 	} else {
+// 		a = p[0]
+// 		b = p[1]
+// 	}
+// 	if b-a > 1 {
+// 		c = (a + b + 1) / 2
+// 		MergeSort1(nums, a, c)
+// 		MergeSort1(nums, c, b)
+
+// 		merge1(nums, nums[a:c], nums[c:b], a, b)
+// 	}
+// }
+
+// func merge1(nums, left, right []int, start, end int) {
+// 	i, j := len(left)-1, len(right)-1
+// 	for ; end > start; end-- {
+// 		if (j == -1) || (i >= 0 && (left[i] > right[j])) {
+// 			nums[end-1] = left[i]
+// 			i--
+// 		} else {
+// 			nums[end-1] = right[j]
+// 			j--
+// 		}
+// 	}
+// }
+
 func TestMergeSort(t *testing.T) {
 	testArray := make([][]int, 10)
 	for i := range testArray {

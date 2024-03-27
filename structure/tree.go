@@ -23,10 +23,6 @@ type BinaryTree struct {
 	root *BinaryNode
 }
 
-func SubTreeHeight() {
-
-}
-
 // Create a test binary tree
 func newTestBinaryTree() BinaryTree {
 	bt := BinaryTree{}
@@ -131,6 +127,26 @@ func (bt *BinaryTree) InOrderDisplay(node ...*BinaryNode) {
 	bt.InOrderDisplay(cur.left)
 	fmt.Println(cur.item)
 	bt.InOrderDisplay(cur.right)
+}
+
+// Use for to perform inorder traversal
+func (bt *BinaryTree) inorderTravFor() []int {
+	cur := bt.root
+	stack := []*BinaryNode{}
+	res := []int{}
+	for cur != nil || len(stack) > 0 {
+		for cur != nil {
+			stack = append(stack, cur)
+			cur = cur.left
+		}
+		l := len(stack)
+		cur = stack[l-1]
+		stack = stack[:l-1]
+		res = append(res, cur.item)
+		cur = cur.right
+	}
+
+	return res
 }
 
 func (bt *BinaryTree) PostOrderDisplay(node ...*BinaryNode) {
