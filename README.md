@@ -17,3 +17,5 @@ Already implemented data structures:
 * AVL tree 
 * Binary Heap
 * Gorounting pool
+* LRU Cache
+
