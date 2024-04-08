@@ -26,12 +26,24 @@ func TestLinkedListAppend(t *testing.T) {
 		record = append(record, tmp)
 	}
 
-	array := order_l.LL2Array()
+	tmp := order_l.LL2Array()
+	array := []int{}
+	for _, v := range tmp {
+		array = append(array, v.(int))
+	}
+
 	require.Equal(t, record, array)
+
 	for i, j := 0, len(record)-1; i < j; i, j = i+1, j-1 {
 		record[i], record[j] = record[j], record[i]
 	}
-	array = l.LL2Array()
+
+	tmp = l.LL2Array()
+	array = []int{}
+	for _, v := range tmp {
+		array = append(array, v.(int))
+	}
+
 	require.Equal(t, record, array)
 }
 

@@ -107,6 +107,7 @@ func radix_countingSort(arr []int, exp int) {
 	output := make([]int, n)
 	count := make([]int, 10)
 
+	// O(n)
 	for i := 0; i < n; i++ {
 		index := arr[i] / exp
 		count[index%10]++
@@ -116,12 +117,16 @@ func radix_countingSort(arr []int, exp int) {
 		count[i] += count[i-1]
 	}
 
+	// O(n)
+	// The reason why reverse is to not break related order
+	// Because in previous, put order is from last to least
 	for i := n - 1; i >= 0; i-- {
 		index := arr[i] / exp
 		output[count[index%10]-1] = arr[i]
 		count[index%10]--
 	}
 
+	// O(n)
 	for i := 0; i < n; i++ {
 		arr[i] = output[i]
 	}
