@@ -77,12 +77,13 @@ func down(h Interface, i, length int) bool {
 			break
 		}
 
-		min := lc                                        // left child
-		if rc := lc + 1; rc < length && h.Less(rc, lc) { // right child exit and right <= left
-			min = rc // right child
+		// Get the min value of two childs
+		min := lc
+		if rc := lc + 1; rc < length && h.Less(rc, lc) {
+			min = rc
 		}
 
-		// The min value of child is greater than parent, stop
+		// If the min value of child is greater than parent, stop
 		if !h.Less(min, cur) {
 			break
 		}
@@ -94,15 +95,23 @@ func down(h Interface, i, length int) bool {
 }
 
 // Below is the example of how you use std heap
+// type pair struct {
+// 	f int
+// 	c byte
+// }
 
-type pair struct {
-	f int
-	c byte
-}
-type hp []pair
+// type hp []pair
 
-func (h hp) Len() int           { return len(h) }
-func (h hp) Less(i, j int) bool { a, b := h[i], h[j]; return a.f < b.f || a.f == b.f && a.c < b.c }
-func (h hp) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
-func (hp) Push(any)             {}
-func (hp) Pop() (_ any)         { return }
+// func (h hp) Len() int           { return len(h) }
+// func (h hp) Less(i, j int) bool { a, b := h[i], h[j]; return a.f < b.f || a.f == b.f && a.c < b.c }
+// func (h hp) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
+// func (hp) Push(any)             {}
+// func (hp) Pop() (_ any)         { return }
+
+// type hp[T comparable] []*node[T]
+
+// func (h hp[T]) Len() int           { return len(h) }
+// func (h hp[T]) Less(i, j int) bool { a, b := h[i], h[j]; return a.freq < b.freq || a.freq == b.freq }
+// func (h *hp[T]) Swap(i, j int)     { (*h)[i], (*h)[j] = (*h)[j], (*h)[i] }
+// func (h *hp[T]) Push(n *node[T])   { (*h) = append((*h), n) }
+// func (h *hp[T]) Pop() (_ any)      { (*h) = (*h)[:len((*h))-1]; return }

@@ -1,6 +1,7 @@
 package sort
 
 import (
+	"fmt"
 	"math/rand"
 	"slices"
 	"testing"
@@ -145,4 +146,19 @@ func TestBinarySort(t *testing.T) {
 		slices.Sort(arr)
 		require.Equal(t, tmp, arr)
 	}
+}
+
+func BenchmarkSort(t *testing.B) {
+	nums := []int{1, 14, -5, 7, 98, 116}
+	for i := 0; i < t.N; i++ {
+		InsertionSort(nums)
+	}
+}
+
+func ExampleInsertionSort() {
+	nums := []int{1, 14, -5, 7, 98, 116}
+	InsertionSort(nums)
+	fmt.Println(nums)
+	// Output:
+	// [-5 1 7 14 98 116]
 }

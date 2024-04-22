@@ -78,7 +78,6 @@ func (this *LRUCache) Put(key int, value int) {
 }
 
 func (this *LRUCache) push_front(node *node) {
-	// fmt.Printf("Push front\n")
 	node.prev.next = node.next
 	node.next.prev = node.prev
 
