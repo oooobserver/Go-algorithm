@@ -19,4 +19,5 @@ Already implemented data structures:
 * Gorounting pool
 * LRU 
 * Trie
+* Disjoin Set
 
