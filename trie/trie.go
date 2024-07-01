@@ -1,5 +1,21 @@
 package trie
 
+/* Trie
+Used to sotre words and can reuse nodes
+for example: word, world
+
+	w
+    |
+	o
+	|
+	r
+   / \
+  d   l
+		\
+	     d
+
+*/
+
 type Trie struct {
 	children [26]*Trie
 	isEnd    bool
