@@ -79,6 +79,92 @@ func printBinaryTreeHelper(root *BinaryNode, level int) {
 	printBinaryTreeHelper(root.left, level+1)
 }
 
+/* Three orders
+Preoder: root, left, right
+Inorder: left, root, right
+Postorder: left, right, root
+*/
+
+// Below are three travel order that implement without recursive
+func (bt *BinaryTree) preorderPro() []int {
+	res := []int{}
+	if bt.root == nil {
+		return res
+	}
+
+	stack := []*BinaryNode{bt.root}
+	for len(stack) != 0 {
+		tmp := len(stack) - 1
+		node := stack[tmp]
+		stack = stack[:tmp]
+		res = append(res, node.item)
+
+		// NOTE: here push right node first because of the stack
+		if node.right != nil {
+			stack = append(stack, node.right)
+		}
+		if node.left != nil {
+			stack = append(stack, node.left)
+		}
+	}
+
+	return res
+}
+
+func (bt *BinaryTree) inorderPro() []int {
+	res := []int{}
+	stack := []*BinaryNode{}
+	cur := bt.root
+
+	for cur != nil || len(stack) != 0 {
+		// The first order thing is push left node
+		if cur != nil {
+			stack = append(stack, cur)
+			cur = cur.left
+		} else {
+			tmp := len(stack) - 1
+			cur = stack[tmp]
+			stack = stack[:tmp]
+			res = append(res, cur.item)
+			cur = cur.right
+		}
+	}
+
+	return res
+}
+
+func (bt *BinaryTree) postorderPro() []int {
+	res := []int{}
+	if bt.root == nil {
+		return res
+	}
+
+	stack := []*BinaryNode{bt.root}
+	for len(stack) != 0 {
+		tmp := len(stack) - 1
+		node := stack[tmp]
+
+		// When a node's left and right both nil
+		// meaning we have travel both its child
+		// it's time to add its value
+		if node.left == nil && node.right == nil {
+			stack = stack[:tmp]
+			res = append(res, node.item)
+		}
+
+		if node.right != nil {
+			stack = append(stack, node.right)
+			node.right = nil
+		}
+		if node.left != nil {
+			stack = append(stack, node.left)
+			node.left = nil
+		}
+	}
+
+	return res
+}
+
 func (bt *BinaryTree) PreOrderDisplay(node ...*BinaryNode) {
 	var cur *BinaryNode
 	if len(node) == 0 {

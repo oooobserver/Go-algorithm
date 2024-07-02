@@ -39,3 +39,14 @@ func TestBinarySearch(t *testing.T) {
 	require.True(t, bt.BinarySearch(7))
 	require.False(t, bt.BinarySearch(9))
 }
+
+func TestBinaryTravelPro(t *testing.T) {
+	bt := newTestBST()
+	bt.PreOrderDisplay()
+	fmt.Println(bt.preorderPro())
+
+	require.Equal(t, bt.inorderTravFor(), bt.inorderPro())
+
+	bt.PostOrderDisplay()
+	fmt.Println(bt.postorderPro())
+}
