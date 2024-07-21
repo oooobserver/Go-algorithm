@@ -23,6 +23,14 @@ type BinaryTree struct {
 	root *BinaryNode
 }
 
+func NewBinaryNode(item int) *BinaryNode {
+	return &BinaryNode{item, nil, nil}
+}
+
+func (b *BinaryNode) Item() int {
+	return b.item
+}
+
 // Create a test binary tree
 func newTestBinaryTree() BinaryTree {
 	bt := BinaryTree{}

@@ -140,3 +140,22 @@ func BinarySort(nums []int) {
 		nums[i] = bh.DeleteMax()
 	}
 }
+
+// Basic binary search algorithm, but if not found, return the position it should be insert
+// Which is the position of the first element that bigger or equal than the target
+func binarySearch(nums []int, n int) int {
+	i, j := 0, len(nums)
+
+	for i < j {
+		mid := (i + j) / 2
+		if nums[mid] > n {
+			j = mid
+		} else if nums[mid] == n {
+			return mid
+		} else {
+			i = mid + 1
+		}
+	}
+
+	return i
+}

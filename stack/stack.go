@@ -5,7 +5,7 @@ import (
 )
 
 type Stack struct {
-	items []interface{}
+	items []any
 }
 
 // Implement the fmt.print feature

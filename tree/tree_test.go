@@ -15,6 +15,7 @@ func TestBSTDelete(t *testing.T) {
 	res := []int{3, 5, 6, 7, 8}
 	test_res := bt.InorderTrav()
 	require.Equal(t, res, test_res)
+	bt.PrintBinaryTree()
 }
 
 func TestTreeTrav(t *testing.T) {
