@@ -20,4 +20,7 @@ Already implemented data structures:
 * LRU 
 * Trie
 * Disjoin Set
+* Skip List
+* Concurrent Skip List
+* Monotonous Stack
 

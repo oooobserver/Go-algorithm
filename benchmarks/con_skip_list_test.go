@@ -17,12 +17,12 @@ func addKV(base int, num int, group int, l *skiplist.SCSkipList) {
 
 func BenchmarkSCSkipListWrite(b *testing.B) {
 	l := skiplist.NewSCSkipList()
-	group := 10
-	num := 10000
+	group := 5
+	num := 20000
 
-	t := time.Now()
 	var wg sync.WaitGroup
 	wg.Add(group)
+	t := time.Now()
 	for i := 1; i <= group; i++ {
 		go func(i int) {
 			defer wg.Done()
@@ -32,5 +32,5 @@ func BenchmarkSCSkipListWrite(b *testing.B) {
 	wg.Wait()
 	interval := time.Since(t).Seconds()
 
-	b.Log("Average write per second: ", float64(group*num)/interval)
+	b.Log("Time consume: ", interval, "Average write per second: ", float64(group*num)/interval)
 }
