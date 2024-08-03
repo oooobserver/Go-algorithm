@@ -7,6 +7,7 @@ Already implemented algorithms:
   * Counting sort
   * Radix sort 
   * Binary Sort
+  * Quick sort
 
 
 Already implemented data structures:

@@ -4,6 +4,7 @@ import (
 	"slices"
 
 	binaryheap "shenye.com/binary_heap"
+	"shenye.com/util"
 )
 
 // Insertion sort, O(n^2)
@@ -141,9 +142,43 @@ func BinarySort(nums []int) {
 	}
 }
 
+// O(nlogn)
+func QuickSort(arr []int) {
+	if len(arr) < 2 {
+		return
+	}
+	pivotIndex := partition(arr)
+	QuickSort(arr[:pivotIndex])
+	QuickSort(arr[pivotIndex+1:])
+}
+
+// partition rearranges the elements based on the pivot
+func partition(arr []int) int {
+	// Randomly select a pivot index and swap it with the last element
+	pivotIndex := util.RandomInt(0, len(arr)-1)
+
+	arr[pivotIndex], arr[len(arr)-1] = arr[len(arr)-1], arr[pivotIndex]
+	// Use the last element as the pivot
+	pivot := arr[len(arr)-1]
+	i := -1
+
+	// Partition the array around the pivot
+	for j := 0; j < len(arr)-1; j++ {
+		if arr[j] < pivot {
+			i++
+			arr[i], arr[j] = arr[j], arr[i]
+		}
+	}
+
+	// Place the pivot in its correct position
+	arr[i+1], arr[len(arr)-1] = arr[len(arr)-1], arr[i+1]
+
+	return i + 1
+}
+
 // Basic binary search algorithm, but if not found, return the position it should be insert
 // Which is the position of the first element that bigger or equal than the target
-func binarySearch(nums []int, n int) int {
+func BinarySearch(nums []int, n int) int {
 	i, j := 0, len(nums)
 
 	for i < j {

@@ -148,6 +148,26 @@ func TestBinarySort(t *testing.T) {
 	}
 }
 
+func TestQuickSort(t *testing.T) {
+	testArray := make([][]int, 5000)
+	for i := range testArray {
+		size := rng.Intn(1000)
+		testArray[i] = make([]int, size)
+
+		for j := 0; j < size; j++ {
+			testArray[i][j] = rng.Int()
+		}
+	}
+
+	for _, arr := range testArray {
+		tmp := make([]int, len(arr))
+		copy(tmp, arr)
+		QuickSort(tmp)
+		slices.Sort(arr)
+		require.Equal(t, tmp, arr)
+	}
+}
+
 func BenchmarkSort(t *testing.B) {
 	nums := []int{1, 14, -5, 7, 98, 116}
 	for i := 0; i < t.N; i++ {
